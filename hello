@@ -3,4 +3,5 @@ void Main()
 {
     printf("안녕");
     printf("맛있니? 혼자 쳐먹으니까?");
+    printf("겁나 쩝쩝거리네");
 }
