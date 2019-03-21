@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 int main() {
-	int n;
+	int n;//html
 	int a[60] = {0, };
 	int c=0;
 	printf("¼ıÀÚ : ");
