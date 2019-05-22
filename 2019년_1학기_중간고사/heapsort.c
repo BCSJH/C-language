@@ -1,4 +1,4 @@
-/*Èü Á¤·Ä ÇÁ·Î±×·¥*/
+/*íž™ ì •ë ¬ í”„ë¡œê·¸ëž¨*/
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -19,7 +19,7 @@ for (parent = left; parent <(right +1)/2; parent=child){
 	a[parent] = temp;
 }
 
-/*Èü Á¤·Ä ÇÔ¼ö*/
+/*íž™ ì •ë ¬ í•¨ìˆ˜*/
 void heapsort(int a[], int n){
 	int i;
 	for (i=n-1; i>0;i--){
@@ -31,7 +31,7 @@ void heapsort(int a[], int n){
 int main(void){
 	int i,nx;
 	int *x;
-	puts("¿ä¼Ò °³¼ö : ");
+	puts("ìš”ì†Œ ê°œìˆ˜ : ");
 	scanf("%d",&nx);
 	x = calloc(nx, sizeof(int));
 	for (i =0; i<nx;i++){
@@ -39,7 +39,7 @@ int main(void){
 		scanf("%d",&x[i]);
 	}
 	heapsort(x,nx);
-	puts("¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇß½À´Ï´Ù.");
+	puts("ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í–ˆìŠµë‹ˆë‹¤.");
 	for (i=0;i<nx;i++)
 		printf("x[%d]=%d\n",i,x[i]);
 	free(x);
