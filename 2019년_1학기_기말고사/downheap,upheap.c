@@ -1,10 +1,10 @@
-/* Q22 Èü Á¤·Ä(Á¤·Ä °úÁ¤À» Æ®¸®·Î Ãâ·Â) */
+/* Q22 í™ ì •ë ¬(ì •ë ¬ ê³¼ì •ì„ íŠ¸ë¦¬ë¡œ ì¶œë ¥) */
 #include <stdio.h>
 #include <stdlib.h>
 
 #define swap(type, x, y)  do { type t = x; x = y; y = t; } while (0)
 
-/*--- 2ÀÇ n Á¦°öÀ» ±¸ÇÕ´Ï´Ù. ---*/
+/*--- 2ì˜ n ì œê³±ì„ êµ¬í•©ë‹ˆë‹¤. ---*/
 static int pow2(int n)
 {
 	int k = 1;
@@ -14,11 +14,11 @@ static int pow2(int n)
 	return (k);
 }
 
-/*--- Èü Ãâ·Â ---*/
+/*--- í™ ì¶œë ¥ ---*/
 static void disp_heap(int a[], int n)
 {
 	int i, w, level;
-	int height = 1;      /* Æ®¸®ÀÇ ³ôÀÌ */
+	int height = 1;      /* íŠ¸ë¦¬ì˜ ë†’ì´ */
 
 	i = n;
 	while (i /= 2)
@@ -38,8 +38,8 @@ static void disp_heap(int a[], int n)
 
 		printf("%*s", pow2(height - level) - 3, "");
 		for (k = 0; k < w; k++) {
-			if (2 * k + i     < n) printf("£¯");
-			if (2 * k + i + 1 < n) printf("¡¬");
+			if (2 * k + i     < n) printf("ï¼");
+			if (2 * k + i + 1 < n) printf("ï¼¼");
 			printf("%*s", pow2(height - level + 1) - 4, "");
 		}
 		putchar('\n');
@@ -50,17 +50,17 @@ Exit:
 	putchar('\n');
 }
 
-/*--- a[left]¢¦a[right]¸¦ ÈüÀ¸·Î ¸¸µì´Ï´Ù. ---*/
+/*--- a[left]ï½a[right]ë¥¼ í™ìœ¼ë¡œ ë§Œë“­ë‹ˆë‹¤. ---*/
 static void downheap(int a[], int left, int right)
 {
-	int temp = a[left];            /* ·çÆ® */
+	int temp = a[left];            /* ë£¨íŠ¸ */
 	int child;
 	int parent;
 
 	for (parent = left; parent < (right + 1) / 2; parent = child) {
-		int cl = parent * 2 + 1;      /* ¿ŞÂÊ ÀÚ½Ä */
-		int cr = cl + 1;            /* ¿À¸¥ÂÊ ÀÚ½Ä */
-		child = (cr <= right && a[cr] > a[cl]) ? cr : cl;   /* Å« °ªÀ» child¿¡ ´ëÀÔÇÕ´Ï´Ù. */
+		int cl = parent * 2 + 1;      /* ì™¼ìª½ ìì‹ */
+		int cr = cl + 1;            /* ì˜¤ë¥¸ìª½ ìì‹ */
+		child = (cr <= right && a[cr] > a[cl]) ? cr : cl;   /* í° ê°’ì„ childì— ëŒ€ì…í•©ë‹ˆë‹¤. */
 		if (temp >= a[child])
 			break;
 		a[parent] = a[child];
@@ -70,14 +70,14 @@ static void downheap(int a[], int left, int right)
 
 static void upheap(int a[], int left, int right)
 {
-	int temp = a[left];            /* ·çÆ® */
+	int temp = a[left];            /* ë£¨íŠ¸ */
 	int child;
 	int parent;
 
 	for (parent = left; parent < (right + 1) / 2; parent = child) {
-		int cl = parent * 2;      /* ¿ŞÂÊ ÀÚ½Ä */
-		int cr = cl;            /* ¿À¸¥ÂÊ ÀÚ½Ä */
-		child = (cr >= right && a[cr] < a[cl]) ? cr : cl;   /* Å« °ªÀ» child¿¡ ´ëÀÔÇÕ´Ï´Ù. */
+		int cl = parent * 2;      /* ì™¼ìª½ ìì‹ */
+		int cr = cl;            /* ì˜¤ë¥¸ìª½ ìì‹ */
+		child = (cr >= right && a[cr] < a[cl]) ? cr : cl;   /* í° ê°’ì„ childì— ëŒ€ì…í•©ë‹ˆë‹¤. */
 		if (temp <= a[child])
 			break;
 		a[parent] = a[child];
@@ -86,25 +86,25 @@ static void upheap(int a[], int left, int right)
 }
 
 
-/*--- Èü Á¤·Ä---*/
+/*--- í™ ì •ë ¬---*/
 void heapsort(int a[], int n)
 {
 	int i;
 
-	puts("¹è¿­À» ÈüÀ¸·Î ¸¸µì´Ï´Ù.\n");
+	puts("ë°°ì—´ì„ í™ìœ¼ë¡œ ë§Œë“­ë‹ˆë‹¤.\n");
 	for (i = (n - 1) / 2; i >= 0; i--) {
 		disp_heap(a, n);
 		downheap(a, i, n - 1);
 	}
 	/*
-	puts("ÈüÀ» ±âÁØÀ¸·Î Á¤·ÄÇÕ´Ï´Ù.\n");
+	puts("í™ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬í•©ë‹ˆë‹¤.\n");
 	for (i = n - 1; i > 0; i--) {
 		swap(int, a[0], a[i]);
 		disp_heap(a, n);
 		downheap(a, 0, i - 1);
 	}
 	*/
-	puts("ÈüÀ» ±âÁØÀ¸·Î Á¤·ÄÇÕ´Ï´Ù.\n");
+	puts("í™ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬í•©ë‹ˆë‹¤.\n");
 	for (i = n - 1; i > 0; i--) {
 		swap(int, a[0], a[i]);
 		disp_heap(a, n);
@@ -117,8 +117,8 @@ int main(void)
 	int i, nx;
 	int *x;
 
-	puts("Èü Á¤·Ä");
-	printf("¿ä¼Ú¼ö : ");
+	puts("í™ ì •ë ¬");
+	printf("ìš”ì†Ÿìˆ˜ : ");
 	scanf("%d", &nx);
 	x = calloc(nx, sizeof(int));
 
@@ -129,12 +129,12 @@ int main(void)
 
 	heapsort(x, nx);
 	/*
-	puts("¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇß½À´Ï´Ù.");
+	puts("ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í–ˆìŠµë‹ˆë‹¤.");
 	for (i = 0; i < nx; i++)
 		printf("x[%d] = %d\n", i, x[i]);
 	*/
 
-	puts("³»¸²Â÷¼øÀ¸·Î Á¤·ÄÇß½À´Ï´Ù.");
+	puts("ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í–ˆìŠµë‹ˆë‹¤.");
 	for (i = 0; i < nx; i++)
 		printf("x[%d] = %d\n", i, x[i]);
 
