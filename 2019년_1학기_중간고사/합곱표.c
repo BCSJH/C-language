@@ -1,19 +1,19 @@
-/* µ¡¼ÀÇ¥¿Í °ö¼ÀÇ¥ */
+/* ë§ì…ˆí‘œì™€ ê³±ì…ˆí‘œ */
 #include <stdio.h>
 
-/*--- x1°ú x2ÀÇ ÇÕÀ» ±¸ÇÕ´Ï´Ù. ---*/
+/*--- x1ê³¼ x2ì˜ í•©ì„ êµ¬í•©ë‹ˆë‹¤. ---*/
 int sum(int x1, int x2)
 {
 	return x1 + x2;
 }
 
-/*--- x1°ú x2ÀÇ °öÀ» ±¸ÇÕ´Ï´Ù. ---*/
+/*--- x1ê³¼ x2ì˜ ê³±ì„ êµ¬í•©ë‹ˆë‹¤. ---*/
 int mul(int x1, int x2)
 {
 	return x1 * x2;
 }
 
-/*--- µ¡¼À, °ö¼ÀÇ¥¸¦ Ãâ·Â ---*/
+/*--- ë§ì…ˆ, ê³±ì…ˆí‘œë¥¼ ì¶œë ¥ ---*/
 void kuku(int(*calc)(int, int))
 {
 	int i, j;
@@ -23,7 +23,7 @@ void kuku(int(*calc)(int, int))
 			printf("%3d", (*calc)(i, j));
 		putchar('\n');
 	}
-		printf(" ¹İ´ë·Î\n");
+		printf(" ë°˜ëŒ€ë¡œ\n");
 		 
 		for (i = 9; i >= 1; i--) {
 			for (j = 9; j >= 1; j--)
@@ -34,10 +34,10 @@ void kuku(int(*calc)(int, int))
 
 int main(void)
 {
-	puts("µ¡¼ÀÇ¥");
+	puts("ë§ì…ˆí‘œ");
 	kuku(sum);
 	
-	puts("\n °ö¼ÀÇ¥");
+	puts("\n ê³±ì…ˆí‘œ");
 	kuku(mul);
 
 	return 0;
