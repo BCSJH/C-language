@@ -85,7 +85,8 @@ namespace MultiChatClient {
             // 연결 완료되었다는 메세지를 띄워준다.
             AppendText(txtHistory, string.Format( "서버와 연결되었습니다.\n " +
                 "특정 사용자에게 보낼 경우 사용자ID:메세지로 입력하시고\n" +
-                "브로드캐스트하려면 BR:메세지를 입력하세요"));
+                "브로드캐스트하려면 BR:메세지를 입력하세요."
+                ));
          }
 
         void DataReceived(IAsyncResult ar) {
@@ -114,7 +115,6 @@ namespace MultiChatClient {
             {// 새로 접속한 클라이언트가 "id:자신의_ID" 전송함
                 string id = tokens[1];
                 check_name.Add(id);
-                comboBox1.Items.Add(id);
 
                 AppendText(txtHistory, string.Format("[접속] ID: {0}", id));
             }
@@ -122,13 +122,15 @@ namespace MultiChatClient {
             {
                 string msg = tokens[1];
                 AppendText(txtHistory, string.Format("[공지]: {0}", msg));
+
+                string clientNumber = tokens[3];
+                AppendText(txtHistory, string.Format("[참여자]: {0}", clientNumber));
             }
             else if (tokens[0].Equals("BR"))
             {
                 string fromID = tokens[1];
                 string msg = tokens[2];
                 AppendText(txtHistory, string.Format("[전체]{0}: {1}", fromID, msg));
-
             }
             else if (tokens[0].Equals("TO"))
             {
@@ -138,10 +140,7 @@ namespace MultiChatClient {
                 string receivedMsg = "[FROM:" + fromID + "][TO:" + toID + "]" + msg;
                 AppendText(txtHistory, receivedMsg);
             }
-            if (tokens[0].Equals("NUM")) {
-                string num = tokens[1];
-                AppendText(txtHistory, string.Format("[참여자]: {0}", num));
-            }
+
             // 텍스트박스에 추가해준다.
             // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
             // 따라서 대리자를 통해 처리한다.
@@ -203,12 +202,6 @@ namespace MultiChatClient {
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (comboBox1.SelectedIndex)
-            {
-
-            }
-        }
+        
     }
 }

@@ -33,7 +33,6 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.lblPortNumber = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tblMainLayout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,15 +53,13 @@
             this.tblMainLayout.Controls.Add(this.btnSend, 4, 2);
             this.tblMainLayout.Controls.Add(this.lblPortNumber, 2, 0);
             this.tblMainLayout.Controls.Add(this.txtID, 3, 0);
-            this.tblMainLayout.Controls.Add(this.comboBox1, 0, 3);
             this.tblMainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMainLayout.Location = new System.Drawing.Point(0, 0);
             this.tblMainLayout.Name = "tblMainLayout";
             this.tblMainLayout.Padding = new System.Windows.Forms.Padding(8);
-            this.tblMainLayout.RowCount = 4;
+            this.tblMainLayout.RowCount = 3;
             this.tblMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tblMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tblMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tblMainLayout.Size = new System.Drawing.Size(584, 465);
             this.tblMainLayout.TabIndex = 2;
@@ -71,18 +68,18 @@
             // 
             this.tblMainLayout.SetColumnSpan(this.txtTTS, 3);
             this.txtTTS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTTS.Location = new System.Drawing.Point(112, 387);
+            this.txtTTS.Location = new System.Drawing.Point(112, 423);
             this.txtTTS.Margin = new System.Windows.Forms.Padding(4, 2, 3, 3);
             this.txtTTS.MaxLength = 260;
             this.txtTTS.Name = "txtTTS";
-            this.txtTTS.Size = new System.Drawing.Size(361, 32);
+            this.txtTTS.Size = new System.Drawing.Size(361, 27);
             this.txtTTS.TabIndex = 7;
             // 
             // lblTTS
             // 
             this.lblTTS.AutoSize = true;
             this.lblTTS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTTS.Location = new System.Drawing.Point(9, 386);
+            this.lblTTS.Location = new System.Drawing.Point(9, 422);
             this.lblTTS.Margin = new System.Windows.Forms.Padding(1);
             this.lblTTS.Name = "lblTTS";
             this.lblTTS.Size = new System.Drawing.Size(98, 34);
@@ -110,7 +107,7 @@
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 2, 3, 3);
             this.txtAddress.MaxLength = 260;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(161, 32);
+            this.txtAddress.Size = new System.Drawing.Size(161, 27);
             this.txtAddress.TabIndex = 1;
             // 
             // btnConnect
@@ -136,13 +133,13 @@
             this.txtHistory.Name = "txtHistory";
             this.txtHistory.ReadOnly = true;
             this.txtHistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtHistory.Size = new System.Drawing.Size(562, 339);
+            this.txtHistory.Size = new System.Drawing.Size(562, 375);
             this.txtHistory.TabIndex = 5;
             // 
             // btnSend
             // 
             this.btnSend.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSend.Location = new System.Drawing.Point(477, 386);
+            this.btnSend.Location = new System.Drawing.Point(477, 422);
             this.btnSend.Margin = new System.Windows.Forms.Padding(1);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(98, 34);
@@ -170,17 +167,8 @@
             this.txtID.Margin = new System.Windows.Forms.Padding(4, 2, 3, 3);
             this.txtID.MaxLength = 10;
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(93, 32);
+            this.txtID.Size = new System.Drawing.Size(93, 27);
             this.txtID.TabIndex = 3;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(11, 424);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(94, 33);
-            this.comboBox1.TabIndex = 9;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // ChatForm
             // 
@@ -207,7 +195,6 @@
         private System.Windows.Forms.TextBox txtHistory;
         private System.Windows.Forms.Label lblPortNumber;
         private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Label lblTTS;
         private System.Windows.Forms.TextBox txtTTS;
