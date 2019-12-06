@@ -171,7 +171,10 @@ namespace MultiChatServer
                 }
 
                     clientNum++; //참여자
+                this.Invoke(new Action(delegate ()
+                {
                     listView1.Items.Add(fromID);//참여자 목록
+                })); 
                     AppendText(txtHistory, string.Format("[접속{0}]ID:{1}:{2}",
                                 clientNum, fromID, obj.WorkingSocket.RemoteEndPoint.ToString()));
 
@@ -221,7 +224,15 @@ namespace MultiChatServer
                 AppendText(txtHistory, string.Format("[전체]{0}: {1}", fromID, msg));
                 sendAll(obj.WorkingSocket, obj.Buffer);
             }
-
+            else if (code.Equals("PRE"))
+            {
+                //3명이 되지 않았는데 선택하면 경고문 보내기
+                fromID = tokens[1].Trim(); //fromID
+                string choose1 = tokens[2];
+                string choose2 = tokens[3];
+                byte[] bDtss = Encoding.UTF8.GetBytes("PRE" + ":" + fromID + "->" + choose1 + "," + choose2 + ":" + "선택" + "->" + OX(choose1,choose2));
+                sendAll(null, bDtss);
+            }
             else if (code.Equals("TO"))   // TO:to_id:message
             {
                 fromID = tokens[1].Trim(); //fromID
@@ -248,7 +259,15 @@ namespace MultiChatServer
             obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
 
         }
-
+        string OX(string i, string ii)
+        {
+            if (card_number_list[int.Parse(i) - 1].Equals(card_number_list[int.Parse(ii) - 1]))
+            {
+                return "정답";
+            }
+            else
+                return "오답";
+        }
         void sendTo(Socket socket, byte[] buffer)
         {
             try

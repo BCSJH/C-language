@@ -15,7 +15,9 @@ namespace MultiChatClient
         IPAddress thisAddress;
         string nameID;
         List<string> check_name = new List<string>();
+        List<int> check_card_number = new List<int>();
 
+        int card_count = 0;
         public ChatForm()
         {
             InitializeComponent();
@@ -152,7 +154,10 @@ namespace MultiChatClient
 
             //접속을 1명했다면 clientName : 1 : 1 :;
             //접속을 2명했다면 clientName : 2 : 1 : 2 :;
-
+            if (tokens[0].Equals("PRE"))
+            {
+                AppendText(txtHistory, tokens[1] + tokens[2]);
+            }
             if (tokens[0].Equals("ClientName"))//listView에 추가하기
             {
                 listView1.Clear();
@@ -277,6 +282,241 @@ namespace MultiChatClient
                 mainSock.Disconnect(false);
                 mainSock.Close();
             }
+
+        }
+        void button_click() {
+            if (check_card_number.Count == 2)
+            {
+                byte[] bDts = new byte[4096];
+                bDts = Encoding.UTF8.GetBytes("PRE:" + nameID + ':' + check_card_number[0] + ':' + check_card_number[1]);
+                AppendText(txtHistory, string.Format("선택 : {0}, {1}", check_card_number[0], check_card_number[1]));
+                mainSock.Send(bDts);//서버에 보내기
+                check_card_number.Clear();
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (button1.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button1.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(1));
+            }
+            else
+            {
+                button1.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(1);
+            }
+            button_click();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (button2.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button2.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(2));
+            }
+            else
+            {
+                button2.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(2);
+            }
+            button_click();
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (button3.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button3.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(3));
+            }
+            else
+            {
+                button3.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(3);
+            }
+            button_click();
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (button4.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button4.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(4));
+            }
+            else
+            {
+                button4.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(4);
+            }
+            button_click();
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (button5.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button5.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(5));
+            }
+            else
+            {
+                button5.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(5);
+            }
+            button_click();
+        }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (button6.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button6.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(6));
+            }
+            else
+            {
+                button6.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(6);
+            }
+            button_click();
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (button7.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button7.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(7));
+            }
+            else
+            {
+                button7.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(7);
+            }
+            button_click();
+        }
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (button8.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button8.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(8));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(8);
+            }
+            button_click();
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (button9.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button9.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(9));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(9);
+            }
+            button_click();
+        }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (button10.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button10.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(10));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(10);
+            }
+            button_click();
+        }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (button11.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button11.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(11));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(11);
+            }
+            button_click();
+        }
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (button12.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button12.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(12));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(12);
+            }
+            button_click();
+        }
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (button13.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button13.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(13));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(13);
+            }
+            button_click();
+        }
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (button14.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button14.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(14));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(14);
+            }
+            button_click();
+        }
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (button15.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button15.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(15));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(15);
+            }
+            button_click();
+        }
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (button16.BackColor == System.Drawing.Color.DarkGray)
+            {
+                button16.BackColor = System.Drawing.Color.LightGray;
+                check_card_number.RemoveAt(check_card_number.IndexOf(16));
+            }
+            else
+            {
+                button8.BackColor = System.Drawing.Color.DarkGray;
+                check_card_number.Add(16);
+            }
+            button_click();
         }
 
 
