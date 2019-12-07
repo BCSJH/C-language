@@ -126,7 +126,6 @@ namespace MultiChatClient
             // tokens[0] - 보낸 사람 ID
             // tokens[1] - 보낸 메세지
             string[] tokens = text.Split(':');
-
             if (tokens[0].Equals("ID"))
             {// 새로 접속한 클라이언트가 "id:자신의_ID" 전송함
                 string id = tokens[1];
@@ -156,6 +155,7 @@ namespace MultiChatClient
 
             //접속을 1명했다면 clientName : 1 : 1 :;
             //접속을 2명했다면 clientName : 2 : 1 : 2 :;
+<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
             if (tokens[0].Equals("OXs"))
             {
                 string fromID = tokens[1];
@@ -165,6 +165,8 @@ namespace MultiChatClient
                 AppendText(txtHistory,text);
             }
 
+=======
+>>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
             if (tokens[0].Equals("ClientName"))//listView에 추가하기
             {
                 this.Invoke(new Action(delegate ()
@@ -180,9 +182,12 @@ namespace MultiChatClient
                     this.Invoke(new Action(delegate ()
                     {
                         listView1.Items.Add(clientName);
+<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                     }));
                     this.Invoke(new Action(delegate ()
                     {
+=======
+>>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                         comboBox1.Items.Add(clientName);
                     }));
                 }
@@ -217,10 +222,14 @@ namespace MultiChatClient
                     button14.Text = "" + card_list[13];
                     button15.Text = "" + card_list[14];
                     button16.Text = "" + card_list[15];
+<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                 }));
                 Thread.Sleep(5000);
                 this.Invoke(new Action(delegate ()
                 {
+=======
+                    Thread.Sleep(5000);
+>>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                     button1.Text = "1";
                     button2.Text = "2";
                     button3.Text = "3";
@@ -313,6 +322,7 @@ namespace MultiChatClient
                 AppendText(txtHistory, string.Format("선택 : {0}, {1}", check_card_number[0], check_card_number[1]));
                 mainSock.Send(bDts);//서버에 보내기
                 check_card_number.Clear();
+<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                 this.Invoke(new Action(delegate ()
                 {
                     button1.BackColor = System.Drawing.Color.LightGray;
@@ -332,6 +342,26 @@ namespace MultiChatClient
                     button15.BackColor = System.Drawing.Color.LightGray;
                     button16.BackColor = System.Drawing.Color.LightGray;
                 }));
+=======
+
+                button1.BackColor = System.Drawing.Color.LightGray;
+                button2.BackColor = System.Drawing.Color.LightGray;
+                button3.BackColor = System.Drawing.Color.LightGray;
+                button4.BackColor = System.Drawing.Color.LightGray;
+                button5.BackColor = System.Drawing.Color.LightGray;
+                button6.BackColor = System.Drawing.Color.LightGray;
+                button7.BackColor = System.Drawing.Color.LightGray;
+                button8.BackColor = System.Drawing.Color.LightGray;
+                button9.BackColor = System.Drawing.Color.LightGray;
+                button10.BackColor = System.Drawing.Color.LightGray;
+                button11.BackColor = System.Drawing.Color.LightGray;
+                button12.BackColor = System.Drawing.Color.LightGray;
+                button13.BackColor = System.Drawing.Color.LightGray;
+                button14.BackColor = System.Drawing.Color.LightGray;
+                button15.BackColor = System.Drawing.Color.LightGray;
+                button16.BackColor = System.Drawing.Color.LightGray;
+
+>>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
             }
         }
         private void button1_Click(object sender, EventArgs e)

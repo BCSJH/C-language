@@ -22,7 +22,7 @@ namespace MultiChatServer
         int clientNum;
 
         List<string> client_ID = new List<string>();//접속한 아이디
-
+        string OXs = "";
         public ChatForm()
         {
             InitializeComponent();
@@ -184,6 +184,7 @@ namespace MultiChatServer
                         listView1.Items.Add(fromID);//참여자 목록
                     }));
                 })); 
+
                     AppendText(txtHistory, string.Format("[접속{0}]ID:{1}:{2}",
                                 clientNum, fromID, obj.WorkingSocket.RemoteEndPoint.ToString()));
 
@@ -239,6 +240,7 @@ namespace MultiChatServer
                 string OXs = "";
                 string s = "";
                 //3명이 되지 않았는데 선택하면 경고문 보내기
+<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
                 //OXs에 출력이 안되는 이유는...?
                 fromID = tokens[1].Trim(); //fromID
                 AppendText(txtHistory, "여긴 도착했어");
@@ -250,6 +252,13 @@ namespace MultiChatServer
                 {s += "X" + ":"; }
 
                 byte[] bDtss = Encoding.UTF8.GetBytes("OXs" + ':' + OXs + ":" + 0);
+=======
+                fromID = tokens[1]; //fromID
+                string choose1 = tokens[2];
+                string choose2 = tokens[3];
+                OX(choose1, choose2);
+                byte[] bDtss = Encoding.UTF8.GetBytes("PRES" + ":" + fromID + "->" + choose1 + "," + choose2 + "선택" + ":" + OXs);
+>>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
                 sendAll(null, bDtss);
                 OXs = "";//값 초기화
             }
@@ -282,9 +291,24 @@ namespace MultiChatServer
             obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
 
         }
+<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
 
         
 
+=======
+        void OX(string i, string ii) //정답 여부
+        {
+            OXs = ""; //값 초기화
+            if (card_number_list[int.Parse(i) - 1] == card_number_list[int.Parse(ii) - 1])
+            {
+                OXs = "정답";
+            }
+            else
+            {
+                OXs = "오답";
+            }
+        }
+>>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
         void sendTo(Socket socket, byte[] buffer)
         {
             try
