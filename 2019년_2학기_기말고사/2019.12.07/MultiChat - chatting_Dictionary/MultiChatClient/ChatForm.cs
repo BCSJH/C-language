@@ -9,6 +9,8 @@ namespace MultiChatClient
 {
     public partial class ChatForm : Form
     {
+        delegate void DsetLabel(string data);//스레드 오류 때문에 선언
+
         delegate void AppendTextDelegate(Control ctrl, string s);
         AppendTextDelegate _textAppender;
         Socket mainSock;
@@ -154,23 +156,40 @@ namespace MultiChatClient
 
             //접속을 1명했다면 clientName : 1 : 1 :;
             //접속을 2명했다면 clientName : 2 : 1 : 2 :;
-            if (tokens[0].Equals("PRE"))
+            if (tokens[0].Equals("OXs"))
             {
-                AppendText(txtHistory, tokens[1] + tokens[2]);
+                string fromID = tokens[1];
+                AppendText(txtHistory, "도착쓰" + text);
+
+                //string mag = tokens[1] + ":" + tokens[2] + "," + tokens[3] + "선택 -> " + tokens[4];
+                AppendText(txtHistory,text);
             }
+
             if (tokens[0].Equals("ClientName"))//listView에 추가하기
             {
-                listView1.Clear();
-                comboBox1.Items.Clear();
-                comboBox1.Items.Add("BR");
+                this.Invoke(new Action(delegate ()
+                {
+                    listView1.Clear();
+                    comboBox1.Items.Clear();
+                    comboBox1.Items.Add("BR");
+                }));
                 int clientNum = int.Parse(tokens[1]);//접속한 인원 수
                 for (int i = 0; i < clientNum; i++)
                 {
                     string clientName = tokens[2 + i];
-                    listView1.Items.Add(clientName);
-                    comboBox1.Items.Add(clientName);
+                    this.Invoke(new Action(delegate ()
+                    {
+                        listView1.Items.Add(clientName);
+                    }));
+                    this.Invoke(new Action(delegate ()
+                    {
+                        comboBox1.Items.Add(clientName);
+                    }));
                 }
-                comboBox1.SelectedIndex = 0;
+                this.Invoke(new Action(delegate ()
+                {
+                    comboBox1.SelectedIndex = 0;
+                }));
             }
             if (tokens[0].Equals("Card"))//listView에 추가하기
             {
@@ -179,44 +198,46 @@ namespace MultiChatClient
                 {
                     int card = int.Parse(tokens[i + 1]);//카드 값
                     card_list.Add(card);
-
-                    //AppendText(txtHistory, "card : " + tokens[i+1]);
                 }
-
-                button1.Text = "" + card_list[0];
-                button2.Text = "" + card_list[1];
-                button3.Text = "" + card_list[2];
-                button4.Text = "" + card_list[3];
-                button5.Text = "" + card_list[4];
-                button6.Text = "" + card_list[5];
-                button7.Text = "" + card_list[6];
-                button8.Text = "" + card_list[7];
-                button9.Text = "" + card_list[8];
-                button10.Text = "" + card_list[9];
-                button11.Text = "" + card_list[10];
-                button12.Text = "" + card_list[11];
-                button13.Text = "" + card_list[12];
-                button14.Text = "" + card_list[13];
-                button15.Text = "" + card_list[14];
-                button16.Text = "" + card_list[15];
+                this.Invoke(new Action(delegate ()
+                {
+                    button1.Text = "" + card_list[0];
+                    button2.Text = "" + card_list[1];
+                    button3.Text = "" + card_list[2];
+                    button4.Text = "" + card_list[3];
+                    button5.Text = "" + card_list[4];
+                    button6.Text = "" + card_list[5];
+                    button7.Text = "" + card_list[6];
+                    button8.Text = "" + card_list[7];
+                    button9.Text = "" + card_list[8];
+                    button10.Text = "" + card_list[9];
+                    button11.Text = "" + card_list[10];
+                    button12.Text = "" + card_list[11];
+                    button13.Text = "" + card_list[12];
+                    button14.Text = "" + card_list[13];
+                    button15.Text = "" + card_list[14];
+                    button16.Text = "" + card_list[15];
+                }));
                 Thread.Sleep(5000);
-                button1.Text = "1";
-                button2.Text = "2";
-                button3.Text = "3";
-                button4.Text = "4";
-                button5.Text = "5";
-                button6.Text = "6";
-                button7.Text = "7";
-                button8.Text = "8";
-                button9.Text = "9";
-                button10.Text = "10";
-                button11.Text = "11";
-                button12.Text = "12";
-                button13.Text = "13";
-                button14.Text = "14";
-                button15.Text = "15";
-                button16.Text = "16";
-
+                this.Invoke(new Action(delegate ()
+                {
+                    button1.Text = "1";
+                    button2.Text = "2";
+                    button3.Text = "3";
+                    button4.Text = "4";
+                    button5.Text = "5";
+                    button6.Text = "6";
+                    button7.Text = "7";
+                    button8.Text = "8";
+                    button9.Text = "9";
+                    button10.Text = "10";
+                    button11.Text = "11";
+                    button12.Text = "12";
+                    button13.Text = "13";
+                    button14.Text = "14";
+                    button15.Text = "15";
+                    button16.Text = "16";
+                }));
             }
             // 텍스트박스에 추가해준다.
             // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
@@ -292,6 +313,25 @@ namespace MultiChatClient
                 AppendText(txtHistory, string.Format("선택 : {0}, {1}", check_card_number[0], check_card_number[1]));
                 mainSock.Send(bDts);//서버에 보내기
                 check_card_number.Clear();
+                this.Invoke(new Action(delegate ()
+                {
+                    button1.BackColor = System.Drawing.Color.LightGray;
+                    button2.BackColor = System.Drawing.Color.LightGray;
+                    button3.BackColor = System.Drawing.Color.LightGray;
+                    button4.BackColor = System.Drawing.Color.LightGray;
+                    button5.BackColor = System.Drawing.Color.LightGray;
+                    button6.BackColor = System.Drawing.Color.LightGray;
+                    button7.BackColor = System.Drawing.Color.LightGray;
+                    button8.BackColor = System.Drawing.Color.LightGray;
+                    button9.BackColor = System.Drawing.Color.LightGray;
+                    button10.BackColor = System.Drawing.Color.LightGray;
+                    button11.BackColor = System.Drawing.Color.LightGray;
+                    button12.BackColor = System.Drawing.Color.LightGray;
+                    button13.BackColor = System.Drawing.Color.LightGray;
+                    button14.BackColor = System.Drawing.Color.LightGray;
+                    button15.BackColor = System.Drawing.Color.LightGray;
+                    button16.BackColor = System.Drawing.Color.LightGray;
+                }));
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -415,7 +455,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button9.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(9);
             }
             button_click();
@@ -429,7 +469,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button10.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(10);
             }
             button_click();
@@ -443,7 +483,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button11.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(11);
             }
             button_click();
@@ -457,7 +497,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button12.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(12);
             }
             button_click();
@@ -471,7 +511,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button13.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(13);
             }
             button_click();
@@ -485,7 +525,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button14.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(14);
             }
             button_click();
@@ -499,7 +539,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button15.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(15);
             }
             button_click();
@@ -513,7 +553,7 @@ namespace MultiChatClient
             }
             else
             {
-                button8.BackColor = System.Drawing.Color.DarkGray;
+                button16.BackColor = System.Drawing.Color.DarkGray;
                 check_card_number.Add(16);
             }
             button_click();
