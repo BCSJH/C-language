@@ -20,6 +20,7 @@ namespace MultiChatServer
         List<int> card_number_list = new List<int>();//랜덤
         List<int> card_OX_list = new List<int>();
         int clientNum;
+        int esc_count = 0;
 
         List<string> client_ID = new List<string>();//접속한 아이디
         string OXs = "";
@@ -140,6 +141,7 @@ namespace MultiChatServer
                                 }
                                 connectedClients.Remove(key);
                                 AppendText(txtHistory, string.Format("접속해제완료:{0}", key));
+                                clientNum--;
                                 byte[] bDts = Encoding.UTF8.GetBytes("ClientName" + ':' + clientNum + ":" + clientIDs);
                                 sendAll(null, bDts);
                             }
@@ -150,14 +152,12 @@ namespace MultiChatServer
                 }
                 obj.WorkingSocket.Disconnect(false);
                 obj.WorkingSocket.Close();
-                clientNum--; //참여자
                              // AppendText(txtHistory, string.Format("클라이언트 접속해제완료{0}", clientNum));
                 return;
             }
 
             // 텍스트로 변환한다.
             string text = Encoding.UTF8.GetString(obj.Buffer);
-            AppendText(txtHistory, text);
 
             // : 기준으로 짜른다.
             string[] tokens = text.Split(':');
@@ -168,7 +168,7 @@ namespace MultiChatServer
             if (code.Equals("ID"))    // 받은 문자열   id:자신의 id
             {
                 fromID = tokens[1].Trim(); //fromID;
-                if (client_ID.Contains(fromID) == true)//접속 불가능
+                if (client_ID.Contains(fromID) == true)//같은 아이디 접속
                 {
                     if (client_ID.Contains(fromID + "(2)") == true)
                         fromID += "(3)";
@@ -211,8 +211,8 @@ namespace MultiChatServer
 
                     if (clientNum == 3 && card_send == 0) // 3명 접속하면 시작
                     {
-
                         card_mix();
+                        esc_count = 0;
                         string card_list = "";
                         for (int i = 0; i < card_number_list.Count; i++)
                         {
@@ -270,11 +270,18 @@ namespace MultiChatServer
                     byte[] bDtss = Encoding.UTF8.GetBytes("PREX" + ":" + fromID + ":" + tokens[2] + ":" + tokens[3]);
                     sendAll(null, bDtss);
                 }
-                if (card_OX_list.Count == 16)
-                {
-                    byte[] bDtss = Encoding.UTF8.GetBytes("ESC" + ":" + "게임종료");
-                    sendAll(null, bDtss);
-                }
+            }
+
+            if (code.Equals("ESC") && esc_count == 0)
+            {
+
+                byte[] bDtss = Encoding.UTF8.GetBytes("ESC" + ":" + "게임종료");
+                sendAll(null, bDtss);
+                card_send = 0;
+                card_OX_list.Clear();
+                for (int i = 1; i < 17; i++) { button_color_change_X(i); }
+                esc_count++;
+                client_ID.Clear();
             }
 
             // 텍스트박스에 추가해준다.
@@ -395,28 +402,31 @@ namespace MultiChatServer
 
         void card_mix() //(1~8) * 2
         {
-            card_number_list.AddRange(card_random());
-            card_number_list.AddRange(card_random());
-        }
-
-        static List<int> card_random()
-        {
-            List<int> card_number_list_random = new List<int>();
             int while_count = 0; // random 6번으로 제한
             while (true)
             {
                 Random r = new Random();
                 int card_number = r.Next(1, 9); // 1~8
-
-                if (while_count < 8)
+                AppendText(txtHistory, card_number+"");
+                if (while_count < 16)
                 {
-                    if (card_number_list_random.Contains(card_number) == true)
+                    int count_card_e = 0;//같은 수는 2개까지
+                    for (int i = 0; i < card_number_list.Count; i++)
                     {
+                        if (card_number_list[i] == card_number)
+                        {
+                            count_card_e++;
+                            
+                        }
+                    }
+                    if (count_card_e == 2)
+                    {
+                        AppendText(txtHistory, "중복");
                         continue;
                     }
                     else // 리스트에 동일한 값이 없을 때 추가
                     {
-                        card_number_list_random.Add(card_number);
+                        card_number_list.Add(card_number);
                         while_count++;
                     }
                 }
@@ -424,9 +434,9 @@ namespace MultiChatServer
                 {
                     break;
                 }
-            }
-            return card_number_list_random;
+            } 
         }
+
 
 
         void OnSendData(object sender, EventArgs e)

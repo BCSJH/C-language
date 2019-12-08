@@ -73,3 +73,11 @@ C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - ch
 C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.ChatForm.resources
 C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.Properties.Resources.resources
 C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.csproj.GenerateResource.Cache
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.exe
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.pdb
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\bin\Debug\MultiChatServer.exe
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\bin\Debug\MultiChatServer.pdb
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.csprojResolveAssemblyReference.cache
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.ChatForm.resources
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.Properties.Resources.resources
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatServer\obj\Debug\MultiChatServer.csproj.GenerateResource.Cache

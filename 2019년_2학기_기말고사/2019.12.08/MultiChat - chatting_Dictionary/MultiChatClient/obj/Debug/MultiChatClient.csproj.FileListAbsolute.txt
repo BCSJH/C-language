@@ -69,3 +69,11 @@ C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - ch
 C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.ChatForm.resources
 C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.Properties.Resources.resources
 C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.07\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.csproj.GenerateResource.Cache
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.exe
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.pdb
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\bin\Debug\MultiChatClient.exe
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\bin\Debug\MultiChatClient.pdb
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.csprojResolveAssemblyReference.cache
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.ChatForm.resources
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.Properties.Resources.resources
+C:\Users\kimbh\C-language\2019년_2학기_기말고사\2019.12.08\MultiChat - chatting_Dictionary\MultiChatClient\obj\Debug\MultiChatClient.csproj.GenerateResource.Cache

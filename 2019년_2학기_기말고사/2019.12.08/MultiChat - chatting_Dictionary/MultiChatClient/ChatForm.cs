@@ -17,10 +17,9 @@ namespace MultiChatClient
         IPAddress thisAddress;
         string nameID;
         List<string> check_name = new List<string>();
-        List<int> check_card_number = new List<int>();
+        List<int> check_card_number = new List<int>();// 2개 선택시 메시지 서버로 메세지 보내기
         List<int> card_list = new List<int>();//random 카트의 리스트
-
-        int card_count = 0;
+        List<int> card_check = new List<int>();
         public ChatForm()
         {
             InitializeComponent();
@@ -39,7 +38,6 @@ namespace MultiChatClient
 
         void OnFormLoaded(object sender, EventArgs e)
         {
-
             if (thisAddress == null)
             {
                 // 로컬호스트 주소를 사용한다.
@@ -161,9 +159,13 @@ namespace MultiChatClient
             {
                 string fromID = tokens[1];
                 AppendText(txtHistory, string.Format("[정답]{0}:{1}:{2}", fromID, tokens[2],tokens[3]));
-                AppendText(txtHistory, tokens[2]+"와"+ tokens[3]);
-                button_color_change_O(Int32.Parse(tokens[2]));
-                button_color_change_O(Int32.Parse(tokens[3]));
+                button_color_change_O(Int32.Parse(tokens[2])); card_check.Add(Int32.Parse(tokens[2]));
+                button_color_change_O(Int32.Parse(tokens[3])); card_check.Add(Int32.Parse(tokens[3]));
+                if (card_check.Count == 16)
+                {
+                    byte[] bDts = Encoding.UTF8.GetBytes("ESC:");
+                    mainSock.Send(bDts);
+                }
             }
             if (tokens[0].Equals("PREX"))
             {
@@ -176,7 +178,19 @@ namespace MultiChatClient
             {
                 //점수 출력?
                 AppendText(txtHistory, string.Format("[게임종료]"));
+                if (MessageBox.Show("게임을 더 하시겠습니까?", "게임종료", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    //초-기-화
+                    check_name.Clear();
+                    check_card_number.Clear();
+                    card_list.Clear();
+                    for (int i = 1; i < 17; i++) { button_color_change_X(i);}
 
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
             if (tokens[0].Equals("ClientName"))//listView에 추가하기
             {
@@ -264,7 +278,6 @@ namespace MultiChatClient
 
             // 수신 대기
             obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
-
         }
         void button_color_change_O(int i) {
             switch (i)
@@ -368,7 +381,6 @@ namespace MultiChatClient
             AppendText(txtHistory, tts);
 
             if (comboBox1.SelectedItem.Equals("BR"))
-            //if (tokens[0].Equals("BR"))
             {
                 bDts = Encoding.UTF8.GetBytes("BR:" + nameID + ':' + tts + ':');
                 AppendText(txtHistory, string.Format("[전체전송]{0}", tts));
