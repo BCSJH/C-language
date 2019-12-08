@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("참여자");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("참여자");
             this.tblMainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.txtTTS = new System.Windows.Forms.TextBox();
             this.lblTTS = new System.Windows.Forms.Label();
@@ -223,9 +223,9 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView1.GridLines = true;
-            listViewItem3.Tag = "";
+            listViewItem1.Tag = "";
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.listView1.Location = new System.Drawing.Point(11, 43);
             this.listView1.Name = "listView1";
             this.tblMainLayout.SetRowSpan(this.listView1, 4);

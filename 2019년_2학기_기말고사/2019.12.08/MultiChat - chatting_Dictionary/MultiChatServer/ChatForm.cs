@@ -18,7 +18,7 @@ namespace MultiChatServer
         Dictionary<string, Socket> connectedClients;
         int card_send = 0;
         List<int> card_number_list = new List<int>();//랜덤
-
+        List<int> card_OX_list = new List<int>();
         int clientNum;
 
         List<string> client_ID = new List<string>();//접속한 아이디
@@ -234,35 +234,6 @@ namespace MultiChatServer
                 AppendText(txtHistory, string.Format("[전체]{0}: {1}", fromID, msg));
                 sendAll(obj.WorkingSocket, obj.Buffer);
             }
-            
-            else if (code.Equals("PRE"))
-            {
-                string OXs = "";
-                string s = "";
-                //3명이 되지 않았는데 선택하면 경고문 보내기
-<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
-                //OXs에 출력이 안되는 이유는...?
-                fromID = tokens[1].Trim(); //fromID
-                AppendText(txtHistory, "여긴 도착했어");
-                OXs += (fromID + ":" + tokens[2] + ":" + tokens[3]);
-
-                if (card_number_list[Convert.ToInt32(tokens[2]) - 1] == card_number_list[Convert.ToInt32(tokens[3]) - 1])
-                {s += "O" + ":"; }
-                else
-                {s += "X" + ":"; }
-
-                byte[] bDtss = Encoding.UTF8.GetBytes("OXs" + ':' + OXs + ":" + 0);
-=======
-                fromID = tokens[1]; //fromID
-                string choose1 = tokens[2];
-                string choose2 = tokens[3];
-                OX(choose1, choose2);
-                byte[] bDtss = Encoding.UTF8.GetBytes("PRES" + ":" + fromID + "->" + choose1 + "," + choose2 + "선택" + ":" + OXs);
->>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
-                sendAll(null, bDtss);
-                OXs = "";//값 초기화
-            }
-            
 
             else if (code.Equals("TO"))   // TO:to_id:message
             {
@@ -280,6 +251,31 @@ namespace MultiChatServer
             {
             }
 
+            if (code.Equals("PRE"))
+            {
+                fromID = tokens[1].Trim(); //fromID
+
+                if (card_number_list[Int32.Parse(tokens[2]) -1] == card_number_list[Int32.Parse(tokens[3]) -1])
+                {
+                    button_color_change_O(Int32.Parse(tokens[2]));
+                    button_color_change_O(Int32.Parse(tokens[3]));
+                    card_OX_list.Add(Int32.Parse(tokens[2]));
+                    card_OX_list.Add(Int32.Parse(tokens[3]));
+                    byte[] bDtss = Encoding.UTF8.GetBytes("PREO" + ":" + fromID + ":" + tokens[2] + ":" + tokens[3]);
+                    sendAll(null, bDtss);
+                }
+                else {
+                    button_color_change_X(Int32.Parse(tokens[2]));
+                    button_color_change_X(Int32.Parse(tokens[3]));
+                    byte[] bDtss = Encoding.UTF8.GetBytes("PREX" + ":" + fromID + ":" + tokens[2] + ":" + tokens[3]);
+                    sendAll(null, bDtss);
+                }
+                if (card_OX_list.Count == 16)
+                {
+                    byte[] bDtss = Encoding.UTF8.GetBytes("ESC" + ":" + "게임종료");
+                    sendAll(null, bDtss);
+                }
+            }
 
             // 텍스트박스에 추가해준다.
             // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
@@ -291,24 +287,85 @@ namespace MultiChatServer
             obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
 
         }
-<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
-
-        
-
-=======
-        void OX(string i, string ii) //정답 여부
+        void button_color_change_O(int i)
         {
-            OXs = ""; //값 초기화
-            if (card_number_list[int.Parse(i) - 1] == card_number_list[int.Parse(ii) - 1])
+            switch (i)
             {
-                OXs = "정답";
-            }
-            else
-            {
-                OXs = "오답";
+                case 1:
+                    button1.BackColor = System.Drawing.Color.Black; break;
+                case 2:
+                    button2.BackColor = System.Drawing.Color.Black; break;
+                case 3:
+                    button3.BackColor = System.Drawing.Color.Black; break;
+                case 4:
+                    button4.BackColor = System.Drawing.Color.Black; break;
+                case 5:
+                    button5.BackColor = System.Drawing.Color.Black; break;
+                case 6:
+                    button6.BackColor = System.Drawing.Color.Black; break;
+                case 7:
+                    button7.BackColor = System.Drawing.Color.Black; break;
+                case 8:
+                    button8.BackColor = System.Drawing.Color.Black; break;
+                case 9:
+                    button9.BackColor = System.Drawing.Color.Black; break;
+                case 10:
+                    button10.BackColor = System.Drawing.Color.Black; break;
+                case 11:
+                    button11.BackColor = System.Drawing.Color.Black; break;
+                case 12:
+                    button12.BackColor = System.Drawing.Color.Black; break;
+                case 13:
+                    button13.BackColor = System.Drawing.Color.Black; break;
+                case 14:
+                    button14.BackColor = System.Drawing.Color.Black; break;
+                case 15:
+                    button15.BackColor = System.Drawing.Color.Black; break;
+                case 16:
+                    button16.BackColor = System.Drawing.Color.Black; break;
+
             }
         }
->>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatServer/ChatForm.cs
+
+        void button_color_change_X(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    button1.BackColor = System.Drawing.Color.LightGray; break;
+                case 2:
+                    button2.BackColor = System.Drawing.Color.LightGray; break;
+                case 3:
+                    button3.BackColor = System.Drawing.Color.LightGray; break;
+                case 4:
+                    button4.BackColor = System.Drawing.Color.LightGray; break;
+                case 5:
+                    button5.BackColor = System.Drawing.Color.LightGray; break;
+                case 6:
+                    button6.BackColor = System.Drawing.Color.LightGray; break;
+                case 7:
+                    button7.BackColor = System.Drawing.Color.LightGray; break;
+                case 8:
+                    button8.BackColor = System.Drawing.Color.LightGray; break;
+                case 9:
+                    button9.BackColor = System.Drawing.Color.LightGray; break;
+                case 10:
+                    button10.BackColor = System.Drawing.Color.LightGray; break;
+                case 11:
+                    button11.BackColor = System.Drawing.Color.LightGray; break;
+                case 12:
+                    button12.BackColor = System.Drawing.Color.LightGray; break;
+                case 13:
+                    button13.BackColor = System.Drawing.Color.LightGray; break;
+                case 14:
+                    button14.BackColor = System.Drawing.Color.LightGray; break;
+                case 15:
+                    button15.BackColor = System.Drawing.Color.LightGray; break;
+                case 16:
+                    button16.BackColor = System.Drawing.Color.LightGray; break;
+
+            }
+        }
         void sendTo(Socket socket, byte[] buffer)
         {
             try

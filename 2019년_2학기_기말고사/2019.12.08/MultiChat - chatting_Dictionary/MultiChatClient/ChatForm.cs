@@ -18,6 +18,7 @@ namespace MultiChatClient
         string nameID;
         List<string> check_name = new List<string>();
         List<int> check_card_number = new List<int>();
+        List<int> card_list = new List<int>();//random 카트의 리스트
 
         int card_count = 0;
         public ChatForm()
@@ -155,18 +156,28 @@ namespace MultiChatClient
 
             //접속을 1명했다면 clientName : 1 : 1 :;
             //접속을 2명했다면 clientName : 2 : 1 : 2 :;
-<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
-            if (tokens[0].Equals("OXs"))
+
+            if (tokens[0].Equals("PREO"))
             {
                 string fromID = tokens[1];
-                AppendText(txtHistory, "도착쓰" + text);
-
-                //string mag = tokens[1] + ":" + tokens[2] + "," + tokens[3] + "선택 -> " + tokens[4];
-                AppendText(txtHistory,text);
+                AppendText(txtHistory, string.Format("[정답]{0}:{1}:{2}", fromID, tokens[2],tokens[3]));
+                AppendText(txtHistory, tokens[2]+"와"+ tokens[3]);
+                button_color_change_O(Int32.Parse(tokens[2]));
+                button_color_change_O(Int32.Parse(tokens[3]));
             }
+            if (tokens[0].Equals("PREX"))
+            {
+                string fromID = tokens[1];
+                AppendText(txtHistory, string.Format("[오답]{0}:{1}:{2}", fromID, tokens[2], tokens[3]));
+                button_color_change_X(Int32.Parse(tokens[2]));
+                button_color_change_X(Int32.Parse(tokens[3]));
+            }
+            if (tokens[0].Equals("ESC"))
+            {
+                //점수 출력?
+                AppendText(txtHistory, string.Format("[게임종료]"));
 
-=======
->>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
+            }
             if (tokens[0].Equals("ClientName"))//listView에 추가하기
             {
                 this.Invoke(new Action(delegate ()
@@ -182,12 +193,10 @@ namespace MultiChatClient
                     this.Invoke(new Action(delegate ()
                     {
                         listView1.Items.Add(clientName);
-<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
+
                     }));
                     this.Invoke(new Action(delegate ()
                     {
-=======
->>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                         comboBox1.Items.Add(clientName);
                     }));
                 }
@@ -198,7 +207,6 @@ namespace MultiChatClient
             }
             if (tokens[0].Equals("Card"))//listView에 추가하기
             {
-                List<int> card_list = new List<int>();//카트의 리스트
                 for (int i = 0; i < 16; i++)//(1~7까의 수 * 2) 14개
                 {
                     int card = int.Parse(tokens[i + 1]);//카드 값
@@ -222,14 +230,11 @@ namespace MultiChatClient
                     button14.Text = "" + card_list[13];
                     button15.Text = "" + card_list[14];
                     button16.Text = "" + card_list[15];
-<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
+
                 }));
                 Thread.Sleep(5000);
                 this.Invoke(new Action(delegate ()
                 {
-=======
-                    Thread.Sleep(5000);
->>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
                     button1.Text = "1";
                     button2.Text = "2";
                     button3.Text = "3";
@@ -261,7 +266,84 @@ namespace MultiChatClient
             obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
 
         }
+        void button_color_change_O(int i) {
+            switch (i)
+            {
+                case 1:
+                    button1.BackColor = System.Drawing.Color.Black; break;
+                case 2:
+                    button2.BackColor = System.Drawing.Color.Black; break;
+                case 3:
+                    button3.BackColor = System.Drawing.Color.Black; break;
+                case 4:
+                    button4.BackColor = System.Drawing.Color.Black; break;
+                case 5:
+                    button5.BackColor = System.Drawing.Color.Black; break;
+                case 6:
+                    button6.BackColor = System.Drawing.Color.Black; break;
+                case 7:
+                    button7.BackColor = System.Drawing.Color.Black; break;
+                case 8:
+                    button8.BackColor = System.Drawing.Color.Black; break;
+                case 9:
+                    button9.BackColor = System.Drawing.Color.Black; break;
+                case 10:
+                    button10.BackColor = System.Drawing.Color.Black; break;
+                case 11:
+                    button11.BackColor = System.Drawing.Color.Black; break;
+                case 12:
+                    button12.BackColor = System.Drawing.Color.Black; break;
+                case 13:
+                    button13.BackColor = System.Drawing.Color.Black; break;
+                case 14:
+                    button14.BackColor = System.Drawing.Color.Black; break;
+                case 15:
+                    button15.BackColor = System.Drawing.Color.Black; break;
+                case 16:
+                    button16.BackColor = System.Drawing.Color.Black; break;
 
+            }
+        }
+
+        void button_color_change_X(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    button1.BackColor = System.Drawing.Color.LightGray; break;
+                case 2:
+                    button2.BackColor = System.Drawing.Color.LightGray; break;
+                case 3:
+                    button3.BackColor = System.Drawing.Color.LightGray; break;
+                case 4:
+                    button4.BackColor = System.Drawing.Color.LightGray; break;
+                case 5:
+                    button5.BackColor = System.Drawing.Color.LightGray; break;
+                case 6:
+                    button6.BackColor = System.Drawing.Color.LightGray; break;
+                case 7:
+                    button7.BackColor = System.Drawing.Color.LightGray; break;
+                case 8:
+                    button8.BackColor = System.Drawing.Color.LightGray; break;
+                case 9:
+                    button9.BackColor = System.Drawing.Color.LightGray; break;
+                case 10:
+                    button10.BackColor = System.Drawing.Color.LightGray; break;
+                case 11:
+                    button11.BackColor = System.Drawing.Color.LightGray; break;
+                case 12:
+                    button12.BackColor = System.Drawing.Color.LightGray; break;
+                case 13:
+                    button13.BackColor = System.Drawing.Color.LightGray; break;
+                case 14:
+                    button14.BackColor = System.Drawing.Color.LightGray; break;
+                case 15:
+                    button15.BackColor = System.Drawing.Color.LightGray; break;
+                case 16:
+                    button16.BackColor = System.Drawing.Color.LightGray; break;
+
+            }
+        }
         void OnSendData(object sender, EventArgs e)
         {
             // 서버가 대기중인지 확인한다.
@@ -321,47 +403,8 @@ namespace MultiChatClient
                 bDts = Encoding.UTF8.GetBytes("PRE:" + nameID + ':' + check_card_number[0] + ':' + check_card_number[1]);
                 AppendText(txtHistory, string.Format("선택 : {0}, {1}", check_card_number[0], check_card_number[1]));
                 mainSock.Send(bDts);//서버에 보내기
+                
                 check_card_number.Clear();
-<<<<<<< HEAD:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
-                this.Invoke(new Action(delegate ()
-                {
-                    button1.BackColor = System.Drawing.Color.LightGray;
-                    button2.BackColor = System.Drawing.Color.LightGray;
-                    button3.BackColor = System.Drawing.Color.LightGray;
-                    button4.BackColor = System.Drawing.Color.LightGray;
-                    button5.BackColor = System.Drawing.Color.LightGray;
-                    button6.BackColor = System.Drawing.Color.LightGray;
-                    button7.BackColor = System.Drawing.Color.LightGray;
-                    button8.BackColor = System.Drawing.Color.LightGray;
-                    button9.BackColor = System.Drawing.Color.LightGray;
-                    button10.BackColor = System.Drawing.Color.LightGray;
-                    button11.BackColor = System.Drawing.Color.LightGray;
-                    button12.BackColor = System.Drawing.Color.LightGray;
-                    button13.BackColor = System.Drawing.Color.LightGray;
-                    button14.BackColor = System.Drawing.Color.LightGray;
-                    button15.BackColor = System.Drawing.Color.LightGray;
-                    button16.BackColor = System.Drawing.Color.LightGray;
-                }));
-=======
-
-                button1.BackColor = System.Drawing.Color.LightGray;
-                button2.BackColor = System.Drawing.Color.LightGray;
-                button3.BackColor = System.Drawing.Color.LightGray;
-                button4.BackColor = System.Drawing.Color.LightGray;
-                button5.BackColor = System.Drawing.Color.LightGray;
-                button6.BackColor = System.Drawing.Color.LightGray;
-                button7.BackColor = System.Drawing.Color.LightGray;
-                button8.BackColor = System.Drawing.Color.LightGray;
-                button9.BackColor = System.Drawing.Color.LightGray;
-                button10.BackColor = System.Drawing.Color.LightGray;
-                button11.BackColor = System.Drawing.Color.LightGray;
-                button12.BackColor = System.Drawing.Color.LightGray;
-                button13.BackColor = System.Drawing.Color.LightGray;
-                button14.BackColor = System.Drawing.Color.LightGray;
-                button15.BackColor = System.Drawing.Color.LightGray;
-                button16.BackColor = System.Drawing.Color.LightGray;
-
->>>>>>> cead706cf4a358fe62765ea7e8393799fb286399:2019년_2학기_기말고사/2019.12.07/MultiChat - chatting_Dictionary/MultiChatClient/ChatForm.cs
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -370,6 +413,10 @@ namespace MultiChatClient
             {
                 button1.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(1));
+            }
+            else if (button1.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -385,6 +432,10 @@ namespace MultiChatClient
                 button2.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(2));
             }
+            else if (button2.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button2.BackColor = System.Drawing.Color.DarkGray;
@@ -398,6 +449,10 @@ namespace MultiChatClient
             {
                 button3.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(3));
+            }
+            else if (button3.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -413,6 +468,10 @@ namespace MultiChatClient
                 button4.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(4));
             }
+            else if (button4.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button4.BackColor = System.Drawing.Color.DarkGray;
@@ -426,6 +485,14 @@ namespace MultiChatClient
             {
                 button5.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(5));
+            }
+            else if (button5.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
+            else if (button5.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -441,6 +508,10 @@ namespace MultiChatClient
                 button6.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(6));
             }
+            else if (button6.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button6.BackColor = System.Drawing.Color.DarkGray;
@@ -454,6 +525,10 @@ namespace MultiChatClient
             {
                 button7.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(7));
+            }
+            else if (button7.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -469,6 +544,10 @@ namespace MultiChatClient
                 button8.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(8));
             }
+            else if (button8.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button8.BackColor = System.Drawing.Color.DarkGray;
@@ -482,6 +561,10 @@ namespace MultiChatClient
             {
                 button9.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(9));
+            }
+            else if (button9.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -497,6 +580,10 @@ namespace MultiChatClient
                 button10.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(10));
             }
+            else if (button10.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button10.BackColor = System.Drawing.Color.DarkGray;
@@ -510,6 +597,10 @@ namespace MultiChatClient
             {
                 button11.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(11));
+            }
+            else if (button11.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -525,6 +616,10 @@ namespace MultiChatClient
                 button12.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(12));
             }
+            else if (button12.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button12.BackColor = System.Drawing.Color.DarkGray;
@@ -538,6 +633,10 @@ namespace MultiChatClient
             {
                 button13.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(13));
+            }
+            else if (button13.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
@@ -553,6 +652,10 @@ namespace MultiChatClient
                 button14.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(14));
             }
+            else if (button14.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button14.BackColor = System.Drawing.Color.DarkGray;
@@ -567,6 +670,10 @@ namespace MultiChatClient
                 button15.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(15));
             }
+            else if (button15.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
+            }
             else
             {
                 button15.BackColor = System.Drawing.Color.DarkGray;
@@ -580,6 +687,10 @@ namespace MultiChatClient
             {
                 button16.BackColor = System.Drawing.Color.LightGray;
                 check_card_number.RemoveAt(check_card_number.IndexOf(16));
+            }
+            else if (button16.BackColor == System.Drawing.Color.Black)
+            {
+                MessageBox.Show("이미 맞춘 카드입니다.");
             }
             else
             {
