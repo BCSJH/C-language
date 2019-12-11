@@ -20,6 +20,7 @@ namespace MultiChatClient
         List<int> check_card_number = new List<int>();// 2개 선택시 메시지 서버로 메세지 보내기
         List<int> card_list = new List<int>();//random 카트의 리스트
         List<int> card_check = new List<int>();
+        int clientNum = 0;
 
         public ChatForm()
         {
@@ -191,7 +192,7 @@ namespace MultiChatClient
                     comboBox1.Items.Clear();
                     comboBox1.Items.Add("BR");
                 }));
-                int clientNum = int.Parse(tokens[1]);//접속한 인원 수
+                clientNum = int.Parse(tokens[1]);//접속한 인원 수
                 for (int i = 0; i < clientNum; i++)
                 {
                     string clientName = tokens[2 + i];
@@ -440,10 +441,19 @@ namespace MultiChatClient
             }
             if (check_card_number.Count == 2)
             {
-                byte[] bDts = new byte[4096];
-                bDts = Encoding.UTF8.GetBytes("PRE:" + nameID + ':' + check_card_number[0] + ':' + check_card_number[1]);
-                AppendText(txtHistory, string.Format("선택 : {0}, {1}", check_card_number[0], check_card_number[1]));
-                mainSock.Send(bDts);//서버에 보내기
+                if (clientNum == 3)
+                {
+                    byte[] bDts = new byte[4096];
+                    bDts = Encoding.UTF8.GetBytes("PRE:" + nameID + ':' + check_card_number[0] + ':' + check_card_number[1]);
+                    AppendText(txtHistory, string.Format("선택 : {0}, {1}", check_card_number[0], check_card_number[1]));
+                    mainSock.Send(bDts);//서버에 보내기
+                }
+                else
+                {
+                    MessageBox.Show("아직 게임이 시작되지 않았습니다.");
+                    button_color_change_X(check_card_number[0]);
+                    button_color_change_X(check_card_number[1]);
+                }
                 
                 check_card_number.Clear();
             }
